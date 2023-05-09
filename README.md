@@ -10,16 +10,16 @@ Your database will be PSQL, and you will interact with it using [node-postgres](
 
 To connect to the databases locally, create two .env files:
 
-.env.test
-.env.development
+- `.env.test`
+- `.env.development`
 
-Ensure that these files are located in the root folder and included in the .gitignore file
+Ensure that these files are located in the root folder and included in the `.gitignore` file
 
 In each of these files, add the following line:
 
 PGDATABASE=<database_name_here>
 
-Replace <database_name_here> with the name specified in the /db/setup.sql file.
+Replace `<database_name_here>` with the name specified in the `/db/setup.sql` file.
 
 ## Husky
 
