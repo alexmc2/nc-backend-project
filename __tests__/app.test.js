@@ -3,6 +3,7 @@ const request = require('supertest');
 const seed = require('../db/seeds/seed');
 const data = require('../db/data/test-data');
 const db = require('../db/connection');
+const endpoints = require('../endpoints.json');
 
 beforeEach(() => seed(data));
 
@@ -48,6 +49,17 @@ describe('GET /categories', () => {
           expect(category).toHaveProperty('slug');
           expect(category).toHaveProperty('description');
         });
+      });
+  });
+});
+
+describe('GET /api', () => {
+  it('should respond with status code 200 and return JSON object with all the available endpoints', () => {
+    return request(app)
+      .get('/api')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body).toEqual(endpoints);
       });
   });
 });

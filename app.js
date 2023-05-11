@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 const { getAllCategories } = require('./controllers/categories.controllers');
+const endpoints = require('./endpoints.json');
+
+app.get('/api', (req, res) => {
+  res.status(200).send(endpoints);
+});
 
 app.get('/api/categories', getAllCategories);
 
