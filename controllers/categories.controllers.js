@@ -12,4 +12,9 @@ const getAllCategories = (req, res, next) => {
     });
 };
 
+
+
+
+
+
 module.exports = { getAllCategories };
