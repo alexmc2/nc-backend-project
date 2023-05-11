@@ -8,9 +8,6 @@ beforeEach(() => seed(data));
 
 afterAll(() => db.end());
 
-// 500 internal server error
-// 404 not found / wrong path
-
 describe('404 Not Found', () => {
   it('should respond with status code 404 if endpoint doesn"t exist', () => {
     request(app)
@@ -37,8 +34,7 @@ describe('GET /categories', () => {
       .then(({ body }) => {
         const { categories } = body;
         expect(categories).toBeInstanceOf(Array);
-        // .then((res) => {
-        //   console.log(res);
+        expect(categories.length).toBe(4);
       });
   });
 
