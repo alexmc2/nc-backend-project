@@ -1,15 +1,16 @@
 const db = require('../db/connection');
 
-const getCommentByReviewId = (review_id) => {
+const commentsByReviewId = (review_id) => {
   return db
-  .query('SELECT * FROM comments WHERE review_id = $1', [review_id])
-  .then((result) => {
-    console.log(result)
-    return result.rows[0];
-  });
+    .query(
+      'SELECT * FROM comments WHERE review_id = $1 ORDER BY created_at DESC',
+      [review_id]
+    )
+    .then((result) => {
+      return result.rows;
+    });
 };
 
-
 module.exports = {
-    getCommentByReviewId,
-  };
+  commentsByReviewId,
+};

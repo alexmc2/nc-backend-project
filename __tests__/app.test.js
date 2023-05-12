@@ -136,3 +136,41 @@ describe('GET /api/reviews', () => {
       });
   });
 });
+
+describe('GET /api/reviews/:review_id/comments', () => {
+  it('should respond with status code 200 and return an array of comment objects', () => {
+    return request(app)
+      .get('/api/reviews/2/comments')
+      .expect(200)
+      .then(({ body }) => {
+        console.log( { body })
+        const { comments } = body;
+        expect(comments).toBeInstanceOf(Array);
+        comments.forEach((comment) => {
+          expect(comment).toHaveProperty('comment_id');
+          expect(comment).toHaveProperty('votes');
+          expect(comment).toHaveProperty('created_at');
+          expect(comment).toHaveProperty('author');
+          expect(comment).toHaveProperty('body');
+        });
+      });
+  });
+
+  it('should respond with status code 404 when input non-existent review id', () => {
+    return request(app)
+      .get('/api/reviews/999999/comments')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Not found!');
+      });
+  });
+
+  it('should respond with status code 400 when input bad review id', () => {
+    return request(app)
+      .get('/api/reviews/dog/comments')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request!');
+      });
+  });
+});
