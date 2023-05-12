@@ -98,3 +98,42 @@ it('should respond with status code 400 for a bad review_id', () => {
       expect(body.msg).toBe('Bad request!');
     });
 });
+
+describe('GET /api/reviews', () => {
+  it('should respond with status code 200', () => {
+    return request(app).get('/api/reviews').expect(200);
+  });
+
+  it('should return an array of review objects', () => {
+    return request(app)
+      .get('/api/reviews')
+      .expect(200)
+      .then(({ body }) => {
+        const { reviews } = body;
+        expect(reviews).toBeInstanceOf(Array);
+        reviews.forEach((review) => {
+          expect(review).toHaveProperty('owner');
+          expect(review).toHaveProperty('title');
+          expect(review).toHaveProperty('review_id');
+          expect(review).toHaveProperty('category');
+          expect(review).toHaveProperty('review_img_url');
+          expect(review).toHaveProperty('created_at');
+          expect(review).toHaveProperty('votes');
+          expect(review).toHaveProperty('designer');
+          expect(review).toHaveProperty('comment_count');
+          expect(review).not.toHaveProperty('review_body');
+        });
+      });
+  });
+
+  it('should return reviews sorted by date in descending order', () => {
+    return request(app)
+      .get('/api/reviews')
+      .expect(200)
+      .then(({ body }) => {
+        const { reviews } = body;
+        console.log(reviews);
+        expect(reviews).toBeSortedBy('created_at', { descending: true });
+      });
+  });
+});
