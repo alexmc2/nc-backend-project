@@ -12,6 +12,7 @@ const {
   handleErrors,
   internalErrors,
 } = require('./controllers/errors.controllers');
+const { getCommentsByReviewId } = require('./controllers/comments.controllers');
 
 app.get('/api', (req, res) => {
   res.status(200).send(endpoints);
@@ -19,6 +20,7 @@ app.get('/api', (req, res) => {
 
 app.get('/api/reviews', getAllReviews);
 app.get('/api/reviews/:review_id', getReviewsById);
+app.get('/api/reviews/:review_id/comments', getCommentsByReviewId);
 app.get('/api/categories', getAllCategories);
 
 app.use(notFound);
