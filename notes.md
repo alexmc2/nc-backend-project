@@ -1,9 +1,13 @@
 ## GET /categories - FLOW
 
 A request is made to the /api/categories route.
+
 The getAllCategories function (categories.controller.js) executed.
+
 If error retrieving categories, the catch block executed - next(err) is called.
+
 Express finds next error handling MW function in stack.
+
 Error handling MW in app.js is executed((err, req, res, next) => { ..- })
 
 
@@ -78,3 +82,36 @@ ALTER TABLE `reviews` ADD FOREIGN KEY (`owner`) REFERENCES `users` (`username`);
 ALTER TABLE `comments` ADD FOREIGN KEY (`review_id`) REFERENCES `reviews` (`review_id`);
 
 ALTER TABLE `comments` ADD FOREIGN KEY (`author`) REFERENCES `users` (`username`);
+
+
+
+## Errors /review_id - FLOW
+
+getReviewsById function attempts to fetch review by ID
+
+If not found, creates error object
+
+Passes this to the next MW with next(err).
+
+Error MW (errors.controllers.js) receives error object 
+
+Sends response with status code and message from the error object.
+
+
+
+## Relevant HTTP Status Codes
+
+- 200 OK
+- 201 Created
+- 204 No Content
+- 400 Bad Request
+- 404 Not Found
+- 405 Method Not Allowed
+- 418 I'm a teapot
+- 422 Unprocessable Entity
+- 500 Internal Server Error
+
+## GET `/api/reviews/:review_id`
+
+- Bad `review_id` (e.g. `/dog`)
+- Well formed `review_id` that doesn't exist in the database (e.g. `/999999`)
