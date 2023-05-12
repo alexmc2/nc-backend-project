@@ -132,7 +132,6 @@ describe('GET /api/reviews', () => {
       .expect(200)
       .then(({ body }) => {
         const { reviews } = body;
-        console.log(reviews);
         expect(reviews).toBeSortedBy('created_at', { descending: true });
       });
   });
