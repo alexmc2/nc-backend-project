@@ -173,3 +173,26 @@ describe('GET /api/reviews/:review_id/comments', () => {
       });
   });
 });
+
+describe('POST /api/reviews/:review_id/comments', () => {
+  it('should respond with status code 201 and return the posted comment', () => {
+    const newComment = {
+      username: 'mallionaire',
+      body: 'Enjoyed this game',
+    };
+    return request(app)
+      .post('/api/reviews/1/comments')
+      .send(newComment)
+      .expect(201)
+      .then(({ body }) => {
+        const { comment } = body;
+        expect(comment).toHaveProperty('comment_id');
+        expect(comment).toHaveProperty('votes');
+        expect(comment).toHaveProperty('created_at');
+        expect(comment).toHaveProperty('author');
+        expect(comment).toHaveProperty('body');
+        expect(comment.author).toBe(newComment.username);
+        expect(comment.body).toBe(newComment.body);
+      });
+  });
+});

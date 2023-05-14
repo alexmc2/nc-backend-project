@@ -1,4 +1,7 @@
-const { commentsByReviewId } = require('../models/comments.models');
+const {
+  commentsByReviewId,
+  userComment,
+} = require('../models/comments.models');
 
 const getCommentsByReviewId = (req, res, next) => {
   commentsByReviewId(req.params.review_id)
@@ -18,6 +21,20 @@ const getCommentsByReviewId = (req, res, next) => {
     });
 };
 
+const postComment = (req, res, next) => {
+  const { review_id } = req.params;
+  const { username, body } = req.body;
+  userComment(review_id, username, body)
+    .then((comment) => {
+      console.log(comment);
+      res.status(201).send({ comment });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 module.exports = {
   getCommentsByReviewId,
+  postComment,
 };

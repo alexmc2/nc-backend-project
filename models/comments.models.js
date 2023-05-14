@@ -11,6 +11,21 @@ const commentsByReviewId = (review_id) => {
     });
 };
 
+const userComment = (review_id, username, body) => {
+    console.log('userComment:', { review_id, username, body });
+    return db
+      .query(
+        `INSERT INTO comments (review_id, author, body) 
+         VALUES ($1, $2, $3) 
+         RETURNING *;`,
+        [review_id, username, body]
+      )
+      .then((result) => {
+        return result.rows[0];
+      });
+  };
+  
 module.exports = {
   commentsByReviewId,
+  userComment
 };
