@@ -196,3 +196,64 @@ describe('POST /api/reviews/:review_id/comments', () => {
       });
   });
 });
+
+describe('PATCH /api/reviews/:review_id', () => {
+  it('should respond with status code 200 and return the updated review', () => {
+    const newVotes = { inc_votes: 1 };
+    return request(app)
+      .patch('/api/reviews/1')
+      .send(newVotes)
+      .expect(200)
+      .then(({ body }) => {
+        const { updatedReview } = body;
+        expect(updatedReview).toHaveProperty('votes');
+        expect(updatedReview.votes).toBe(2);
+        expect(updatedReview).toEqual({
+          review_id: 1,
+          title: 'Agricola',
+          category: 'euro game',
+          designer: 'Uwe Rosenberg',
+          owner: 'mallionaire',
+          review_body: 'Farmyard fun!',
+          review_img_url:
+            'https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg?w=700&h=700',
+          created_at: '2021-01-18T10:00:20.514Z',
+          votes: 2,
+        });
+      });
+  });
+
+  it('should respond with status code 400 when input invalid review id', () => {
+    const newVotes = { inc_votes: 1 };
+    return request(app)
+      .patch('/api/reviews/dog')
+      .send(newVotes)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request!');
+      });
+  });
+
+  it('should respond with status code 400 when input invalid vote increment', () => {
+    const newVotes = { inc_votes: 'one' };
+    return request(app)
+      .patch('/api/reviews/1')
+      .send(newVotes)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request!');
+      });
+  });
+
+  it('should respond with status code 404 when input review id that does not exist', () => {
+    const newVotes = { inc_votes: 1 };
+    return request(app)
+          .patch("/api/reviews/9999")
+          .send(newVotes)
+          .expect(404)
+          .then((response) => {
+            expect(response.body.msg).toBe('Not Found!');
+            
+      });
+  });
+});

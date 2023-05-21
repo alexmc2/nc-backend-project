@@ -5,6 +5,7 @@ const endpoints = require('./endpoints.json');
 const {
   getReviewsById,
   getAllReviews,
+  patchReviewVotes,
 } = require('./controllers/reviews.controllers');
 const {
   notFound,
@@ -28,6 +29,7 @@ app.get('/api/reviews/:review_id', getReviewsById);
 app.get('/api/reviews/:review_id/comments', getCommentsByReviewId);
 app.get('/api/categories', getAllCategories);
 app.post('/api/reviews/:review_id/comments', postComment);
+app.patch('/api/reviews/:review_id', patchReviewVotes);
 
 app.use(notFound);
 app.use(handlePSQLErrors);

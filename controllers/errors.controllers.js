@@ -25,4 +25,9 @@ const internalErrors = (err, req, res, next) => {
   res.status(500).send({ msg: 'Internal server error!' });
 };
 
-module.exports = { notFound, handleErrors, internalErrors, handlePSQLErrors };
+module.exports = {
+  notFound,
+  handleErrors,
+  internalErrors,
+  handlePSQLErrors,
+};

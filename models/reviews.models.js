@@ -1,4 +1,5 @@
 const db = require('../db/connection');
+console.log('in model');
 
 const reviewsById = (review_id) => {
   return db
@@ -31,7 +32,21 @@ const getReviews = () => {
     });
 };
 
+const updateReviewVotes = (review_id, inc_votes) => {
+  const query = `UPDATE reviews SET votes = votes + $1 WHERE review_id = $2 RETURNING *`;
+  return db.query(query, [inc_votes, review_id]).then((result) => {
+    if (result.rows.length === 0) {
+      const err = new Error('Not Found!');
+      err.status = 404;
+      throw err;
+    }
+    console.log('here!');
+    return result.rows[0];
+  });
+};
+
 module.exports = {
   reviewsById,
   getReviews,
+  updateReviewVotes,
 };

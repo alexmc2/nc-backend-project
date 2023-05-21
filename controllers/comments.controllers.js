@@ -26,13 +26,19 @@ const postComment = (req, res, next) => {
   const { username, body } = req.body;
   userComment(review_id, username, body)
     .then((comment) => {
-      console.log(comment);
+      //console.log(comment);
       res.status(201).send({ comment });
     })
     .catch((err) => {
       next(err);
     });
 };
+
+
+
+
+
+
 
 module.exports = {
   getCommentsByReviewId,
