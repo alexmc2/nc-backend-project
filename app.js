@@ -36,8 +36,4 @@ app.use(handlePSQLErrors);
 app.use(handleErrors);
 app.use(internalErrors);
 
-// app.listen(3002, () => {
-//   console.log('port listening on 3002');
-// });
-
 module.exports = app;

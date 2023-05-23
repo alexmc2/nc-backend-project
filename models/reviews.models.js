@@ -1,5 +1,4 @@
 const db = require('../db/connection');
-console.log('in model');
 
 const reviewsById = (review_id) => {
   return db
@@ -40,7 +39,7 @@ const updateReviewVotes = (review_id, inc_votes) => {
       err.status = 404;
       throw err;
     }
-    console.log('here!');
+
     return result.rows[0];
   });
 };
