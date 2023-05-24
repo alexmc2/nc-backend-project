@@ -18,6 +18,7 @@ const {
   postComment,
   deleteCommentById,
 } = require('./controllers/comments.controllers');
+const { getTheUsers } = require('./controllers/users.controllers');
 
 app.use(express.json());
 
@@ -32,6 +33,7 @@ app.get('/api/categories', getAllCategories);
 app.post('/api/reviews/:review_id/comments', postComment);
 app.patch('/api/reviews/:review_id', patchReviewVotes);
 app.delete('/api/comments/:comment_id', deleteCommentById);
+app.get('/api/users', getTheUsers);
 
 app.use(notFound);
 app.use(handlePSQLErrors);

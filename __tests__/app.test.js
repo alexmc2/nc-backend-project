@@ -280,3 +280,32 @@ describe('DELETE /api/comments/:comment_id', () => {
       });
   });
 });
+describe('GET /api/users', () => {
+  it('should respond with status code 200', () => {
+    return request(app).get('/api/users').expect(200);
+  });
+
+  it('should return an array', () => {
+    return request(app)
+      .get('/api/users')
+      .expect(200)
+      .then(({ body }) => {
+        const { users } = body;
+        expect(users).toBeInstanceOf(Array);
+      });
+  });
+
+  it('should return an array of user objects with "username", "name" and "avatar_url" as properties', () => {
+    return request(app)
+      .get('/api/users')
+      .expect(200)
+      .then(({ body }) => {
+        const { users } = body;
+        users.forEach((user) => {
+          expect(user).toHaveProperty('username');
+          expect(user).toHaveProperty('name');
+          expect(user).toHaveProperty('avatar_url');
+        });
+      });
+  });
+});
