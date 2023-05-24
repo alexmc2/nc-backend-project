@@ -1,6 +1,7 @@
 const {
   commentsByReviewId,
   userComment,
+  deleteComment,
 } = require('../models/comments.models');
 
 const getCommentsByReviewId = (req, res, next) => {
@@ -26,21 +27,26 @@ const postComment = (req, res, next) => {
   const { username, body } = req.body;
   userComment(review_id, username, body)
     .then((comment) => {
-      //console.log(comment);
       res.status(201).send({ comment });
     })
     .catch((err) => {
       next(err);
     });
 };
+const deleteCommentById = (req, res, next) => {
+  const { comment_id } = req.params;
 
-
-
-
-
-
+  deleteComment(comment_id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
 module.exports = {
   getCommentsByReviewId,
   postComment,
+  deleteCommentById,
 };

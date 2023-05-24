@@ -16,6 +16,7 @@ const {
 const {
   getCommentsByReviewId,
   postComment,
+  deleteCommentById,
 } = require('./controllers/comments.controllers');
 
 app.use(express.json());
@@ -30,6 +31,7 @@ app.get('/api/reviews/:review_id/comments', getCommentsByReviewId);
 app.get('/api/categories', getAllCategories);
 app.post('/api/reviews/:review_id/comments', postComment);
 app.patch('/api/reviews/:review_id', patchReviewVotes);
+app.delete('/api/comments/:comment_id', deleteCommentById);
 
 app.use(notFound);
 app.use(handlePSQLErrors);

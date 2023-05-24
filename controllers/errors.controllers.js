@@ -15,7 +15,11 @@ const handlePSQLErrors = (err, req, res, next) => {
 };
 const handleErrors = (err, req, res, next) => {
   if (err.status) {
-    res.status(err.status).send({ msg: err.message || 'An error occurred!' });
+    if (err.status === 204) {
+      res.status(204).send();
+    } else {
+      res.status(err.status).send({ msg: err.message || 'An error occurred!' });
+    }
   } else {
     next(err);
   }

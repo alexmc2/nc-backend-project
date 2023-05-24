@@ -248,12 +248,35 @@ describe('PATCH /api/reviews/:review_id', () => {
   it('should respond with status code 404 when input review id that does not exist', () => {
     const newVotes = { inc_votes: 1 };
     return request(app)
-          .patch("/api/reviews/9999")
-          .send(newVotes)
-          .expect(404)
-          .then((response) => {
-            expect(response.body.msg).toBe('Not Found!');
-            
+      .patch('/api/reviews/9999')
+      .send(newVotes)
+      .expect(404)
+      .then((response) => {
+        expect(response.body.msg).toBe('Not Found!');
+      });
+  });
+});
+
+describe('DELETE /api/comments/:comment_id', () => {
+  it('should respond with status code 204 when comment is successfully deleted', () => {
+    return request(app).delete('/api/comments/1').expect(204);
+  });
+
+  it('should respond with status code 404 when input non-existent comment id', () => {
+    return request(app)
+      .delete('/api/comments/999999')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Not found!');
+      });
+  });
+
+  it('should respond with status code 400 when input invalid comment id', () => {
+    return request(app)
+      .delete('/api/comments/dog')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request!');
       });
   });
 });

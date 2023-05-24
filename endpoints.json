@@ -20,14 +20,37 @@
     "exampleResponse": {
       "reviews": [
         {
-          "title": "One Night Ultimate Werewolf",
-          "designer": "Akihisa Okui",
-          "owner": "happyamy2016",
-          "review_img_url": "https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          "owner": "cooljmessy",
+          "title": "Velit tempor ullamco amet ipsum dolor voluptate.",
+          "review_id": 14,
           "category": "hidden-roles",
-          "created_at": "2018-05-30T15:59:13.341Z",
-          "votes": 0,
-          "comment_count": 6
+          "review_img_url": "https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?w=700&h=700",
+          "created_at": "2021-02-05T11:27:26.563Z",
+          "votes": 3,
+          "designer": "Don Keigh",
+          "comment_count": "0"
+        },
+        {
+          "owner": "tickle122",
+          "title": "Kerplunk; Don't lose your marbles",
+          "review_id": 13,
+          "category": "dexterity",
+          "review_img_url": "https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg?w=700&h=700",
+          "created_at": "2021-01-25T11:16:54.963Z",
+          "votes": 9,
+          "designer": "Avery Wunzboogerz",
+          "comment_count": "3"
+        },
+        {
+          "owner": "jessjelly",
+          "title": "Super Rhino Hero",
+          "review_id": 10,
+          "category": "dexterity",
+          "review_img_url": "https://images.pexels.com/photos/4691579/pexels-photo-4691579.jpeg?w=700&h=700",
+          "created_at": "2021-01-22T11:35:50.936Z",
+          "votes": 7,
+          "designer": "Gamey McGameface",
+          "comment_count": "2"
         }
       ]
     }
@@ -58,12 +81,119 @@
     "exampleResponse": {
       "comments": [
         {
-          "body": "I loved this game too!",
-          "votes": 16,
-          "author": "bainesface",
-          "created_at": "2017-11-22T12:36:03.389Z"
+          "comment_id": 59,
+          "body": "Quis duis mollit ad enim deserunt.",
+          "review_id": 1,
+          "author": "jessjelly",
+          "votes": 3,
+          "created_at": "2021-03-27T19:48:58.110Z"
+        },
+        {
+          "comment_id": 60,
+          "body": "Laboris nostrud ea ex occaecat aute quis consectetur anim.",
+          "review_id": 1,
+          "author": "cooljmessy",
+          "votes": 17,
+          "created_at": "2021-03-27T14:15:38.110Z"
+        },
+        {
+          "comment_id": 61,
+          "body": "Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis. Ffugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat?",
+          "review_id": 1,
+          "author": "weegembump",
+          "votes": 1,
+          "created_at": "2021-03-27T14:15:36.110Z"
         }
       ]
+    }
+  },
+  "POST /api/reviews/:review_id/comments": {
+    "description": "post a comment on review when input a valid review id ",
+    "queries": "this endpoint doesn't accept queries",
+    "exampleRequest": {
+      "username": "grumpy19",
+      "body": "Loved this review!"
+    },
+    "exampleResponse": {
+      "comment": {
+        "comment_id": 69,
+        "body": "Loved this review!",
+        "review_id": 2,
+        "author": "grumpy19",
+        "votes": 0,
+        "created_at": "2023-05-24T18:42:45.768Z"
+      }
+    }
+  },
+  "PATCH /api/reviews/:review_id": {
+    "description": "update the review with given number of votes when input valid review id",
+    "queries": "",
+    "exampleRequest": {
+      "inc_votes": "1"
+    },
+    "exampleResponse": {
+      "updatedReview": {
+        "review_id": 4,
+        "title": "One Night Ultimate Werewolf",
+        "category": "hidden-roles",
+        "designer": "Akihisa Okui",
+        "owner": "happyamy2016",
+        "review_body": "We couldn't find the werewolf!",
+        "review_img_url": "https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?w=700&h=700",
+        "created_at": "2021-01-18T10:01:41.251Z",
+        "votes": 6
+      }
+    }
+  },
+
+  "DELETE /api/comments/:comment_id": {
+    "description": "deletes a review comment when input a valid comment id",
+    "queries": "this endpoint doesn't accept queries"
+  },
+  " GET /api/users": {
+    "description": "",
+    "queries": "",
+    "exampleRequest": {
+      "username": "",
+      "body": ""
+    },
+    "exampleResponse": {
+      "comment": {}
+    }
+  },
+  "GET /api/reviews (queries)": {
+    "description": "",
+    "queries": "",
+    "exampleRequest": {
+      "username": "",
+      "body": ""
+    },
+    "exampleResponse": {
+      "comment": {}
+    }
+  },
+
+  "GET /api/reviews/:review_id (comment count)": {
+    "description": "",
+    "queries": "",
+    "exampleRequest": {
+      "username": "",
+      "body": ""
+    },
+    "exampleResponse": {
+      "comment": {}
+    }
+  },
+
+  "GET /api/users/:username": {
+    "description": "",
+    "queries": "",
+    "exampleRequest": {
+      "username": "",
+      "body": ""
+    },
+    "exampleResponse": {
+      "comment": {}
     }
   }
 }
