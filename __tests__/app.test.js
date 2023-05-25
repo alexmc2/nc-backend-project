@@ -252,7 +252,7 @@ describe('PATCH /api/reviews/:review_id', () => {
       .send(newVotes)
       .expect(404)
       .then((response) => {
-        expect(response.body.msg).toBe('Not Found!');
+        expect(response.body.msg).toBe('Not found!');
       });
   });
 });
@@ -306,6 +306,75 @@ describe('GET /api/users', () => {
           expect(user).toHaveProperty('name');
           expect(user).toHaveProperty('avatar_url');
         });
+      });
+  });
+});
+
+describe('GET /api/reviews (queries)', () => {
+  it('should respond with status code 200', () => {
+    return request(app).get('/api/reviews').expect(200);
+  });
+
+  it('should return an array of review objects', () => {
+    return request(app)
+      .get('/api/reviews')
+      .expect(200)
+      .then(({ body }) => {
+        const { reviews } = body;
+        expect(reviews).toBeInstanceOf(Array);
+        reviews.forEach((review) => {
+          expect(review).toHaveProperty('owner');
+          expect(review).toHaveProperty('title');
+          expect(review).toHaveProperty('review_id');
+          expect(review).toHaveProperty('category');
+          expect(review).toHaveProperty('review_img_url');
+          expect(review).toHaveProperty('created_at');
+          expect(review).toHaveProperty('votes');
+          expect(review).toHaveProperty('designer');
+          expect(review).toHaveProperty('comment_count');
+          expect(review).not.toHaveProperty('review_body');
+        });
+      });
+  });
+
+  it('should return reviews sorted by date in descending order by default', () => {
+    return request(app)
+      .get('/api/reviews')
+      .expect(200)
+      .then(({ body }) => {
+        const { reviews } = body;
+        expect(reviews).toBeSortedBy('created_at', { descending: true });
+      });
+  });
+
+  it('should return reviews sorted by the sort_by query', () => {
+    const sortBy = 'review_id';
+    return request(app)
+      .get(`/api/reviews?sort_by=${sortBy}`)
+      .expect(200)
+      .then(({ body }) => {
+        const { reviews } = body;
+        expect(reviews).toBeSortedBy(sortBy, { descending: true });
+      });
+  });
+
+  it('should return reviews sorted in ascending order when order query is set to "asc"', () => {
+    const order = 'asc';
+    return request(app)
+      .get(`/api/reviews?order=${order}`)
+      .expect(200)
+      .then(({ body }) => {
+        const { reviews } = body;
+        expect(reviews).toBeSortedBy('created_at', { descending: false });
+      });
+  });
+  it('should respond with status code 404 when no reviews are found for the category', () => {
+    const category = 'nonsense';
+    return request(app)
+      .get(`/api/reviews?category=${category}`)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Not found!');
       });
   });
 });

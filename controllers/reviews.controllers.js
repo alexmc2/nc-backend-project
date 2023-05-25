@@ -23,7 +23,8 @@ const getReviewsById = (req, res, next) => {
 };
 
 const getAllReviews = (req, res, next) => {
-  getReviews()
+  const { category, sort_by, order } = req.query;
+  getReviews(category, sort_by, order)
     .then((reviews) => {
       res.status(200).send({ reviews });
     })
