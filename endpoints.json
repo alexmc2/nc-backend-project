@@ -188,29 +188,6 @@
       ]
     }
   },
-  "GET /api/reviews (queries)": {
-    "description": "",
-    "queries": "",
-    "exampleRequest": {
-      "username": "",
-      "body": ""
-    },
-    "exampleResponse": {
-      "comment": {}
-    }
-  },
-
-  "GET /api/reviews/:review_id (comment count)": {
-    "description": "",
-    "queries": "",
-    "exampleRequest": {
-      "username": "",
-      "body": ""
-    },
-    "exampleResponse": {
-      "comment": {}
-    }
-  },
 
   "GET /api/users/:username": {
     "description": "",

@@ -378,3 +378,18 @@ describe('GET /api/reviews (queries)', () => {
       });
   });
 });
+
+describe('GET /reviews/:review_id (comment count)', () => {
+  it('should respond with a comment_count property and status 200', () => {
+    const reviewId = 4;
+
+    return request(app)
+      .get(`/api/reviews/${reviewId}`)
+      .expect(200)
+      .then(({ body }) => {
+        const { review } = body;
+        expect(review).toHaveProperty('comment_count');
+        expect(typeof review.comment_count).toBe('number');
+      });
+  });
+});
