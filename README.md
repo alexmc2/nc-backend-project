@@ -1,6 +1,6 @@
 # Northcoders House of Games API
 
-Welcome to my Northcoders board game reviews API! This is the backend component of my solo portfolio project and provides access to game reviews and user comments. The server is built using Node.js and Express, with data stored in a PostgreSQL database. It includes comprehensive testing using Jest and Supertest to ensure functionality and reliability.
+Welcome to my Northcoders board game reviews API! This is the backend component of my solo portfolio project and provides access to board game reviews, review comments and user data. The server is built using Node.js and Express, with data stored in a PostgreSQL database. It includes comprehensive testing using Jest and Supertest to ensure functionality and reliability.
 
 The API currently offers the following functionality:
 
