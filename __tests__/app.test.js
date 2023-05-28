@@ -393,3 +393,28 @@ describe('GET /reviews/:review_id (comment count)', () => {
       });
   });
 });
+
+describe('GET /api/users/:username', () => {
+  it('should return the user object and respond with status 200', () => {
+    const username = 'mallionaire';
+    return request(app)
+      .get(`/api/users/${username}`)
+      .expect(200)
+      .then(({ body }) => {
+        const { user } = body;
+        expect(user).toHaveProperty('username', username);
+        expect(user).toHaveProperty('name');
+        expect(user).toHaveProperty('avatar_url');
+      });
+  });
+
+  it('should respond with status code 404 when user not found', () => {
+    const username = 'imposter';
+    return request(app)
+      .get(`/api/users/${username}`)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Not found!');
+      });
+  });
+});

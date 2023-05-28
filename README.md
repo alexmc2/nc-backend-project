@@ -11,6 +11,7 @@ The API currently offers the following functionality:
 - Post a new comment for a specific review.
 - Update the vote count for a specific review.
 - Delete a comment by its ID.
+- Retrieve a specific user by the username.
 
 The API is hosted using the following services:
 
@@ -28,6 +29,7 @@ To get started with the project, follow the steps below:
 1. **Clone the Repository:** Start by cloning the project repository from GitHub. Open your terminal and run the command `git clone https://github.com/alexmc2/nc-backend-project` to create a local copy of the project on your machine.
 
 2. **Install Dependencies:** Ensure that you have Node.js and npm installed. Navigate to the project's root folder in your terminal and run the command `npm install`. This will install the following dependencies:
+
    - PostgresQL
    - dotenv
    - Express
