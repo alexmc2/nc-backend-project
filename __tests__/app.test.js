@@ -418,3 +418,51 @@ describe('GET /api/users/:username', () => {
       });
   });
 });
+
+describe('PATCH /api/comments/:comment_id', () => {
+  it('should return the updated comment and respond with status code 200', () => {
+    const commentId = 2;
+    const incVotes = 1;
+
+    return request(app)
+      .patch(`/api/comments/${commentId}`)
+      .send({ inc_votes: incVotes })
+      .expect(200)
+      .then(({ body }) => {
+        console.log({ body });
+        const updatedComment = body.comment[0];
+        console.log(updatedComment);
+
+        expect(updatedComment.comment_id).toBe(commentId);
+        expect(updatedComment.votes).toBe(14);
+        expect(body.comment.length).toBe(1);
+      });
+  });
+
+  it('should respond with status code 400 when input invalid comment id', () => {
+    const invalidCommentId = 'dog';
+    const newVotes = { inc_votes: 1 };
+
+    return request(app)
+      .patch(`/api/comments/${invalidCommentId}`)
+      .send(newVotes)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request!');
+      });
+  });
+
+  it('should respond with status code 404 when comment id does not exist', () => {
+    const doesNotExist = 9999;
+    const newVotes = { inc_votes: 1 };
+
+    return request(app)
+      .patch(`/api/comments/${doesNotExist}`)
+      .send(newVotes)
+      .expect(404)
+      .then(({ body }) => {
+        console.log({ body });
+        expect(body.msg).toBe('Not found!');
+      });
+  });
+});
