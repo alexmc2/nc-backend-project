@@ -4,6 +4,7 @@ const {
   updateReviewVotes,
   commentsByReviewId,
   userComment,
+  newReview,
 } = require('../models/reviews.models');
 
 const getReviewsById = (req, res, next) => {
@@ -70,10 +71,24 @@ const postComment = (req, res, next) => {
     });
 };
 
+const postNewReview = (req, res, next) => {
+  const newReviewData = req.body;
+
+  newReview(newReviewData)
+    .then((review) => {
+      res.status(201).send({ review });
+    })
+    .catch((err) => {
+      console.log(err)
+      next(err);
+    });
+};
+
 module.exports = {
   getReviewsById,
   getAllReviews,
   patchReviewVotes,
   getCommentsByReviewId,
   postComment,
+  postNewReview,
 };

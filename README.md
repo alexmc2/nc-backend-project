@@ -9,9 +9,10 @@ The API currently offers the following functionality:
 - Retrieve a specific review by its ID, including the number of comments associated with it.
 - Retrieve all comments for a specific review.
 - Post a new comment for a specific review.
-- Update the vote count for a specific review.
+- Update the vote counts for both reviews and comments.
 - Delete a comment by its ID.
 - Retrieve a specific user by the username.
+- Post a new review.
 
 The API is hosted using the following services:
 

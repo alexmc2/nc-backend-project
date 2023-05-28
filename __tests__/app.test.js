@@ -466,3 +466,35 @@ describe('PATCH /api/comments/:comment_id', () => {
       });
   });
 });
+describe('POST /api/reviews', () => {
+  it('should respond with status code 201 and return the newly created review', () => {
+    const newReview = {
+      owner: 'dav3rid',
+      title:
+        'Blood on the Clocktower - an Intriguing and Engaging Social Deduction Game',
+      category: 'social deduction',
+      review_img_url:
+        'https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?w=700&h=700',
+      review_body:
+        "Finally, a social deduction game for everyone, including the people who don't like social deduction games.",
+      designer: 'The Pandemonium Institute',
+    };
+
+    return request(app)
+      .post('/api/reviews')
+      .send(newReview)
+      .expect(201)
+      .then((response) => {
+        const { review } = response.body;
+        expect(review).toHaveProperty('review_id');
+        expect(review).toHaveProperty('title');
+        expect(review).toHaveProperty('category');
+        expect(review).toHaveProperty('designer');
+        expect(review).toHaveProperty('owner');
+        expect(review).toHaveProperty('review_body');
+        expect(review).toHaveProperty('review_img_url');
+        expect(review).toHaveProperty('created_at');
+        expect(review).toHaveProperty('votes');
+      });
+  });
+});

@@ -95,10 +95,32 @@ const userComment = (review_id, username, body) => {
     });
 };
 
+const newReview = (newReviewData) => {
+  const { owner, title, review_body, designer, category, review_img_url } =
+    newReviewData;
+
+  return db
+    .query(
+      `
+      INSERT INTO reviews
+        (owner, title, review_body, designer, category, review_img_url)
+      VALUES
+        ($1, $2, $3, $4, $5, $6)
+      RETURNING *
+      `,
+      [owner, title, review_body, designer, category, review_img_url]
+    )
+    .then((result) => {
+      console.log(result);
+      return result.rows[0];
+    });
+};
+
 module.exports = {
   reviewsById,
   getReviews,
   updateReviewVotes,
   commentsByReviewId,
   userComment,
+  newReview,
 };
