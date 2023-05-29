@@ -21,9 +21,11 @@ The API is hosted using the following services:
 
 **Link to hosted server:** [https://game-reviews-m0nu.onrender.com/api](https://game-reviews-m0nu.onrender.com/api)
 
+**Link to database structure:** [https://dbdiagram.io/d/645c1e6cdca9fb07c4de35cd](https://dbdiagram.io/d/645c1e6cdca9fb07c4de35cd)
+
 ## Getting Started
 
-The project requires Node.js version 14.18.1 or higher and PostgresQL version 8.7.1 or higher.
+The project requires Node.js version 14.18.1 or higher and PostgreSQL version 8.7.1 or higher.
 
 To get started with the project, follow the steps below:
 
@@ -31,7 +33,7 @@ To get started with the project, follow the steps below:
 
 2. **Install Dependencies:** Ensure that you have Node.js and npm installed. Navigate to the project's root folder in your terminal and run the command `npm install`. This will install the following dependencies:
 
-   - PostgresQL
+   - PostgreSQL
    - dotenv
    - Express
    - Jest
