@@ -2,6 +2,7 @@ const express = require('express');
 const apiRouter = require('./routes/api.router');
 const endpoints = require('./endpoints.json');
 const app = express();
+const cors = require('cors');
 
 const {
   notFound,
@@ -16,6 +17,7 @@ app.get('/api', (req, res) => {
   res.status(200).send(endpoints);
 });
 
+app.use(cors());
 app.use('/api', apiRouter);
 app.use(notFound);
 app.use(handlePSQLErrors);
