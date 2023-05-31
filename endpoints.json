@@ -56,22 +56,21 @@
     }
   },
 
-  "GET /api/users": {
-    "description": "serves an array of all users",
+  "GET /api/reviews/:review_id": {
+    "description": "serves a specific review by id",
     "queries": [],
     "exampleResponse": {
-      "users": [
-        {
-          "username": "mallionaire",
-          "name": "haz",
-          "avatar_url": "https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg"
-        },
-        {
-          "username": "philippaclaire9",
-          "name": "philippa",
-          "avatar_url": "https://avatars2.githubusercontent.com/u/24604688?s=460&v=4"
-        }
-      ]
+      "review": {
+        "owner": "cooljmessy",
+        "title": "Velit tempor ullamco amet ipsum dolor voluptate.",
+        "review_id": 14,
+        "category": "hidden-roles",
+        "review_img_url": "https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?w=700&h=700",
+        "created_at": "2021-02-05T11:27:26.563Z",
+        "votes": 3,
+        "designer": "Don Keigh",
+        "comment_count": "0"
+      }
     }
   },
 
@@ -107,9 +106,10 @@
       ]
     }
   },
+
   "POST /api/reviews/:review_id/comments": {
     "description": "post a comment on review when input a valid review id ",
-    "queries": "this endpoint doesn't accept queries",
+    "queries": [],
     "exampleRequest": {
       "username": "grumpy19",
       "body": "Loved this review!"
@@ -125,9 +125,10 @@
       }
     }
   },
+
   "PATCH /api/reviews/:review_id": {
     "description": "update the review with given number of votes when input valid review id",
-    "queries": "",
+    "queries": [],
     "exampleRequest": {
       "inc_votes": "1"
     },
@@ -148,11 +149,12 @@
 
   "DELETE /api/comments/:comment_id": {
     "description": "deletes a review comment when input a valid comment id",
-    "queries": "this endpoint doesn't accept queries"
+    "queries": []
   },
-  " GET /api/users": {
+
+  "GET /api/users": {
     "description": "get all users",
-    "queries": "this endpoint doesn't accept queries",
+    "queries": [],
     "exampleResponse": {
       "users": [
         {
@@ -191,11 +193,7 @@
 
   "GET /api/users/:username": {
     "description": "returns a single user from a provided username",
-    "queries": "",
-    "exampleRequest": {
-      "username": "",
-      "body": ""
-    },
+    "queries": [],
     "exampleResponse": {
       "user": {
         "username": "tickle122",
@@ -227,6 +225,7 @@
 
   "POST /api/reviews": {
     "description": "Post a new review",
+    "queries": [],
     "exampleRequest": {
       "owner": "dav3rid",
       "title": "Blood on the Clocktower - an Intriguing and Engaging Social Deduction Game",
